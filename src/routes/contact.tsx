@@ -54,7 +54,7 @@ function ContactPage() {
       <PageHeader
         eyebrow="Contact"
         title={<>Let's <span className="italic text-primary">design</span> something together.</>}
-        intro="Whether you have a project in mind or just want to say hello — my inbox is open."
+        intro="Whether you have a project in mind or just want to say hello my inbox is open."
       />
 
       <section className="mx-auto max-w-6xl px-6 grid md:grid-cols-12 gap-10">
