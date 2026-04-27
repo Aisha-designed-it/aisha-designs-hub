@@ -46,7 +46,7 @@ function AboutPage() {
           <p className="text-lg leading-relaxed text-foreground/90">
             I'm a passionate UI/UX designer focused on creating intuitive,
             user-centered digital experiences. My work spans wireframes,
-            prototypes and user flows — always grounded in research and shaped
+            prototypes and user flows always grounded in research and shaped
             by an empathy for the people I'm designing for.
           </p>
           <p className="text-lg leading-relaxed text-muted-foreground">
