@@ -51,7 +51,7 @@ function PortfolioPage() {
       <PageHeader
         eyebrow="Selected work"
         title={<>A small body of work, <span className="italic text-primary">growing fast</span>.</>}
-        intro="A look at the projects I've shaped over the past two years — from research and wireframes to interactive prototypes."
+        intro="A look at the projects I've shaped over the past two years from research and wireframes to interactive prototypes."
       />
 
       <section className="mx-auto max-w-6xl px-6 space-y-24 pb-12">
