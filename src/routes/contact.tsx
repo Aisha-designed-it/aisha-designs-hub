@@ -118,16 +118,25 @@ function ContactPage() {
           </div>
 
           {status.type !== "idle" && (
-            <p className={`mt-4 text-sm ${status.type === "ok" ? "text-primary" : "text-destructive"}`}>
+            <p
+              className={`mt-4 text-sm ${
+                status.type === "ok"
+                  ? "text-primary"
+                  : status.type === "loading"
+                    ? "text-muted-foreground"
+                    : "text-destructive"
+              }`}
+            >
               {status.msg}
             </p>
           )}
 
           <button
             type="submit"
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:opacity-90 transition"
+            disabled={status.type === "loading"}
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:opacity-90 transition disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Send message <Send size={14} />
+            {status.type === "loading" ? "Sending…" : "Send message"} <Send size={14} />
           </button>
         </form>
       </section>
