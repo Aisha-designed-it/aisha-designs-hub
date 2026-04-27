@@ -1,6 +1,8 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 function NotFoundComponent() {
   return (
@@ -29,11 +31,11 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Aisha Aliyu Arinola — UI/UX Designer" },
+      { name: "description", content: "Portfolio of Aisha Aliyu Arinola, UI/UX designer & freelancer." },
+      { name: "author", content: "Aisha Aliyu Arinola" },
+      { property: "og:title", content: "Aisha Aliyu Arinola — UI/UX Designer" },
+      { property: "og:description", content: "Designing intuitive digital experiences with clarity and creativity." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
@@ -65,5 +67,13 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <div className="min-h-screen flex flex-col">
+      <SiteHeader />
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <SiteFooter />
+    </div>
+  );
 }
