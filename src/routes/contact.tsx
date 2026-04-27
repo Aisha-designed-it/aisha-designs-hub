@@ -26,14 +26,17 @@ const schema = z.object({
   message: z.string().trim().min(5, "Tell me a little more").max(1000),
 });
 
+const WEB3FORMS_ACCESS_KEY = "780bd4a0-c68d-43c8-8f1b-800b4cd0f5a8";
+
 function ContactPage() {
-  const [status, setStatus] = useState<{ type: "idle" | "ok" | "error"; msg?: string }>({
+  const [status, setStatus] = useState<{ type: "idle" | "ok" | "error" | "loading"; msg?: string }>({
     type: "idle",
   });
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     const parsed = schema.safeParse({
       name: fd.get("name"),
       email: fd.get("email"),
@@ -43,10 +46,32 @@ function ContactPage() {
       setStatus({ type: "error", msg: parsed.error.issues[0]?.message ?? "Please check the form." });
       return;
     }
-    const subject = encodeURIComponent(`New message from ${parsed.data.name}`);
-    const body = encodeURIComponent(`${parsed.data.message}\n\n— ${parsed.data.name} (${parsed.data.email})`);
-    window.location.href = `mailto:aliyuaishah50@gmail.com?subject=${subject}&body=${body}`;
-    setStatus({ type: "ok", msg: "Opening your email client…" });
+
+    setStatus({ type: "loading", msg: "Sending your message…" });
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: parsed.data.name,
+          email: parsed.data.email,
+          message: parsed.data.message,
+          subject: `New portfolio message from ${parsed.data.name}`,
+          from_name: "Portfolio Contact Form",
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus({ type: "ok", msg: "Thanks! Your message has been sent. I'll be in touch soon." });
+        form.reset();
+      } else {
+        setStatus({ type: "error", msg: data.message ?? "Something went wrong. Please try again." });
+      }
+    } catch {
+      setStatus({ type: "error", msg: "Network error. Please try again in a moment." });
+    }
   };
 
   return (
@@ -93,16 +118,25 @@ function ContactPage() {
           </div>
 
           {status.type !== "idle" && (
-            <p className={`mt-4 text-sm ${status.type === "ok" ? "text-primary" : "text-destructive"}`}>
+            <p
+              className={`mt-4 text-sm ${
+                status.type === "ok"
+                  ? "text-primary"
+                  : status.type === "loading"
+                    ? "text-muted-foreground"
+                    : "text-destructive"
+              }`}
+            >
               {status.msg}
             </p>
           )}
 
           <button
             type="submit"
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:opacity-90 transition"
+            disabled={status.type === "loading"}
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:opacity-90 transition disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Send message <Send size={14} />
+            {status.type === "loading" ? "Sending…" : "Send message"} <Send size={14} />
           </button>
         </form>
       </section>
