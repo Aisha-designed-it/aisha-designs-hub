@@ -35,10 +35,14 @@ export const Route = createRootRoute({
       { name: "description", content: "Portfolio of Aisha Aliyu Arinola, UI/UX designer & freelancer." },
       { name: "author", content: "Aisha Aliyu Arinola" },
       { property: "og:title", content: "Aisha Aliyu Arinola — UI/UX Designer" },
-      { property: "og:description", content: "Designing intuitive digital experiences with clarity and creativity." },
+      { property: "og:description", content: "Portfolio of Aisha Aliyu Arinola, UI/UX designer & freelancer." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Aisha Aliyu Arinola — UI/UX Designer" },
+      { name: "twitter:description", content: "Portfolio of Aisha Aliyu Arinola, UI/UX designer & freelancer." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/2b20c188-05cf-486f-94e1-94ba1a5fb1c7/id-preview-c0d21f6d--8b02e22b-43d3-49d7-8824-84b9cccddbdd.lovable.app-1777261203105.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/2b20c188-05cf-486f-94e1-94ba1a5fb1c7/id-preview-c0d21f6d--8b02e22b-43d3-49d7-8824-84b9cccddbdd.lovable.app-1777261203105.png" },
     ],
     links: [
       {
