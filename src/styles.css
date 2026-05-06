@@ -1,6 +1,8 @@
 @import "tailwindcss" source(none);
-@source "../src";
 @import "tw-animate-css";
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&display=swap");
+
+@source "../src";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -11,8 +13,6 @@
   font-style: normal;
   font-display: swap;
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&display=swap");
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
